@@ -1,8 +1,8 @@
-import fs from 'fs'
+const fs = require('fs')
 
 const exportFn = () => {
   return {
-    name: 'vite-plugin-antdv1-momentjs',
+    name: 'vite-plugin-antdv1-momentjs-resolver',
     configResolved(config) {
       config.optimizeDeps.esbuildOptions.plugins = config.optimizeDeps.esbuildOptions.plugins ?? [];
       config.optimizeDeps.esbuildOptions.plugins.push({
@@ -26,4 +26,4 @@ const exportFn = () => {
   }
 };
 
-export default exportFn;
+module.exports = exportFn

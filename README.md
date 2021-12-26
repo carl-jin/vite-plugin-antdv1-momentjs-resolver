@@ -1,4 +1,4 @@
-# vite-plugin-antdv1-momentjs
+# vite-plugin-antdv1-momentjs-resolver
 
 Solve the Bug of vite execution error because antd-vue version 1.7.8 imported moment by using interopDefault
 
@@ -18,17 +18,17 @@ The main purpose of this plugin is to replace `import * as moment from "mooment"
 # Usage
 
 ```shell
-$ yarn add vite-plugin-antdv1-momentjs
+$ yarn add vite-plugin-antdv1-momentjs-resolver
 ```
 
 ```typescript
 //  vite.cofnig.ts
 
-import AntdMomentResovler from 'vite-plugin-antdv1-momentjs'
+import AntdMomentResolver from 'vite-plugin-antdv1-momentjs-resolver'
 
 export default defineConfig(({ command }) => {
   return {
-    plugins:[AntdMomentResovler()]
+    plugins:[AntdMomentresolver()]
   }
 })
 ```
