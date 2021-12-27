@@ -1,4 +1,5 @@
 const fs = require('fs')
+const replace = require("@rollup/plugin-replace");
 
 const exportFn = () => {
   return {
@@ -22,6 +23,17 @@ const exportFn = () => {
           });
         },
       });
+
+      //  添加打包时的替换
+      config.build.rollupOptions.plugins = config.build.rollupOptions.plugins ?? [];
+      config.build.rollupOptions.plugins.push(
+        replace({
+          values: {
+            'import * as moment from': 'import moment from',
+          },
+          preventAssignment: true,
+        }),
+      );
     },
   }
 };
