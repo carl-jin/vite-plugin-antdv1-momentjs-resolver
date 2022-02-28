@@ -1,27 +1,31 @@
-const fs = require('fs');
-const replace = require('@rollup/plugin-replace');
+const fs = require("fs");
+const replace = require("@rollup/plugin-replace");
 
-const exportFn = (reg) => {
-  
+const defaultReg = /ant-design-vue\/[\w-\\\/]*\.js$/;
+const exportFn = (reg = defaultReg) => {
   return {
-    name: 'vite-plugin-antdv1-momentjs-resolver',
+    name: "vite-plugin-antdv1-momentjs-resolver",
     configResolved(config) {
       //  以来预构建时候替换 esbuild
-      config.optimizeDeps.esbuildOptions.plugins = config.optimizeDeps.esbuildOptions.plugins ? config.optimizeDeps.esbuildOptions.plugins : [];
+      config.optimizeDeps.esbuildOptions.plugins = config.optimizeDeps
+        .esbuildOptions.plugins
+        ? config.optimizeDeps.esbuildOptions.plugins
+        : [];
       config.optimizeDeps.esbuildOptions.plugins.push({
-        name: 'replace-code',
+        name: "replace-code",
         setup(build) {
-            // console.log(build.initialOptions.entryPoints)
           build.onLoad(
             {
               filter: reg,
             },
             (args) => {
-                
               // 首先获取源代码内容
-              let source = fs.readFileSync(args.path, 'utf8');
-              if (source.indexOf('import * as moment from')) {
-                source = source.replace(/import\s\*\sas\smoment\sfrom/g, 'import moment from');
+              let source = fs.readFileSync(args.path, "utf8");
+              if (source.indexOf("import * as moment from")) {
+                source = source.replace(
+                  /import\s\*\sas\smoment\sfrom/g,
+                  "import moment from"
+                );
               }
               return {
                 contents: source,
@@ -35,8 +39,8 @@ const exportFn = (reg) => {
       config.plugins.push(
         replace({
           values: {
-            'import * as moment from': (id) => {
-              return 'import moment from';
+            "import * as moment from": (id) => {
+              return "import moment from";
             },
           },
           include: [reg],
