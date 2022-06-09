@@ -1,17 +1,13 @@
 const fs = require("fs");
 const replace = require("@rollup/plugin-replace");
 
-const defaultReg = /ant-design-vue\/[\w-\\\/]*\.js$/;
+const defaultReg = /\/moment-util\.js$/;
 const exportFn = (reg = defaultReg) => {
   return {
     name: "vite-plugin-antdv1-momentjs-resolver",
     configResolved(config) {
       //  以来预构建时候替换 esbuild
-      config.optimizeDeps.esbuildOptions.plugins = config.optimizeDeps
-        .esbuildOptions.plugins
-        ? config.optimizeDeps.esbuildOptions.plugins
-        : [];
-      config.optimizeDeps.esbuildOptions.plugins.push({
+      config.optimizeDeps.esbuildOptions.plugins = (config.optimizeDeps.esbuildOptions.plugins || []).push({
         name: "replace-code",
         setup(build) {
           build.onLoad(
@@ -33,7 +29,7 @@ const exportFn = (reg = defaultReg) => {
             }
           );
         },
-      });
+      })
 
       //  添加打包时的替换 rollup
       config.plugins.push(
