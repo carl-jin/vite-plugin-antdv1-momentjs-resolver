@@ -1,14 +1,16 @@
 {
   "name": "vite-plugin-antdv1-momentjs-resolver",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Solve the Bug of vite execution error because antd-vue version 1.7.8 imported moment by using interopDefault",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "license": "MIT",
   "author": "carl-jin",
   "files": [
-    "src"
+    "src",
+    "dist"
   ],
   "scripts": {
+    "build": "tsc"
   },
   "keywords": [
     "vite",
@@ -26,5 +28,10 @@
   "bugs": {
     "url": "https://github.com/carl-jin/vite-plugin-antdv1-momentjs-resolver/issues"
   },
-  "homepage": "https://github.com/carl-jin/vite-plugin-antdv1-momentjs-resolver/tree/main/#readme"
+  "homepage": "https://github.com/carl-jin/vite-plugin-antdv1-momentjs-resolver/tree/main/#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.5",
+    "typescript": "^4.8.4",
+    "vite": "^3.1.8"
+  }
 }
