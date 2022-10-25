@@ -1,16 +1,17 @@
+import { Plugin } from 'vite'
 const fs = require("fs");
 const replace = require("@rollup/plugin-replace");
 
 const defaultReg = /\/moment-util\.js$/;
-const exportFn = (reg = defaultReg) => {
+const exportFn: (reg?: typeof defaultReg) => Plugin = (reg = defaultReg) => {
   return {
     name: "vite-plugin-antdv1-momentjs-resolver",
     configResolved(config) {
       //  以来预构建时候替换 esbuild
-      if (!config.optimizeDeps.esbuildOptions.plugins) {
-        config.optimizeDeps.esbuildOptions.plugins = [];
+      if (!config?.optimizeDeps?.esbuildOptions?.plugins) {
+        config.optimizeDeps.esbuildOptions!.plugins = [];
       }
-      config.optimizeDeps.esbuildOptions.plugins.push({
+      config.optimizeDeps.esbuildOptions!.plugins.push({
         name: "replace-code",
         setup(build) {
           build.onLoad({ filter: reg }, (args) => {
@@ -28,10 +29,11 @@ const exportFn = (reg = defaultReg) => {
       });
 
       //  添加打包时的替换 rollup
+      // @ts-ignore
       config.plugins.push(
         replace({
           values: {
-            "import * as moment from": (id) => {
+            "import * as moment from": () => {
               return "import moment from";
             },
           },
@@ -43,4 +45,4 @@ const exportFn = (reg = defaultReg) => {
   };
 };
 
-module.exports = exportFn;
+export default exportFn;

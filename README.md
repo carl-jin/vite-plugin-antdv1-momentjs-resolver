@@ -4,7 +4,7 @@ Solve the Bug of vite execution error because antd-vue version 1.7.8 imported mo
 
 Check the detail here [#375](https://github.com/vueComponent/ant-design-vue/issues/3715)
 
-The main purpose of this plugin is to replace `import * as moment from "mooment"`  in ant-design-vue.
+The main purpose of this plugin is to replace `import * as moment from "moment"`  in ant-design-vue.
 
 ```javascript
   source = source.replace(/import\s\*\sas\smoment\sfrom/g, 'import moment from');
@@ -18,7 +18,7 @@ The main purpose of this plugin is to replace `import * as moment from "mooment"
 # Usage
 
 ```shell
-$ yarn add vite-plugin-antdv1-momentjs-resolver
+$ yarn add vite-plugin-antdv1-momentjs-resolver -D
 ```
 
 ```typescript
